@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--CSS-->
+  <style>
+    html,
+    body {
+      font-family: 'Calibri, sans-serif';
+    }
+
+    body {
+      margin: 0px;
+    }
+
+    * {
+      box-sizing: border-box;
+      /* font-family: 'Calibri, sans-serif'; */
+      font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+
+      float: left;
+      width: calc(50% - 2px);
+      padding: 10px;
+      margin: 1px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+
+      .column {
+        width: 100%;
+        margin: 0px;
+        margin-bottom: 2%;
+      }
+
+    }
+
+    #header1 span {
+      border-bottom: 1px solid white;
+      margin: 18px;
+      padding: 0px;
+    }
+
+    #header2 span {
+      margin: 9px;
+      padding: 5px;
+    }
+  </style>
+  <script>
+    Chart.plugins.unregister(ChartDataLabels);
+    let aspectRatio = 2;
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // some code..
+      aspectRatio = 1
+    }
+  </script>
+</head>
+
+<body>
+
+  <!--ROW 1-->
+  <div class="row">
+    <div class="column" style="background-color:#ddd;">
+      <div style="background-color: #113;text-align:center;padding:10px">
+        <div id="header1" style="color:#ddd;">
+          <span>
+            GWP
+          </span>
+          <span>
+            NWP
+          </span>
+          <span>
+            NEP
+          </span>
+          <span>
+            ROE
+          </span>
+        </div>
+        <div id="header2" style="color:#ddd;">
+          <span>
+            $42 B
+          </span>
+          <span>
+            $37.8 B
+          </span>
+          <span>
+            $34 B
+          </span>
+          <span>
+            8 %
+          </span>
+        </div>
+      </div>
+
+      <h3 style="text-align:center">Expense Ratio</h3>
+      <canvas id="chart1" class="canvas"></canvas>
+      <!--Stacked bar chart LHS-->
+      <script>
+        var ctx3 = document.getElementById('chart1');
+        var myChart1 = new Chart(ctx3, {
+          type: 'bar',
+          plugins: [ChartDataLabels],
+          data: {
+            labels: ['Value'],
+            datasets: [
+              {
+                label: 'Loss',
+                data: [25.0],
+                backgroundColor: 'rgb(217,54,54)',
+              },
+              {
+                label: 'Aquisition',
+                data: [15.0],
+                backgroundColor: 'rgb(228,139,74)',
+              },
+              {
+                label: 'Admin',
+                data: [14.0],
+                backgroundColor: 'rgb(255,170,0)',
+              },
+              {
+                label: 'UW Margin',
+                data: [1.0],
+                backgroundColor: 'rgb(0,176,80) ',
+              },
+
+
+            ]
+          },
+          options: {
+            maintainAspectRatio: true,
+            aspectRatio: aspectRatio,
+            scales: {
+              xAxes: [{
+                barThickness: 200,
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                stacked: true
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+
+
+                },
+                stacked: true,
+                ticks: {
+                  display: false //this will remove only the label
+                }
+
+              }]
+            },
+            tooltips: {
+              mode: 'point',
+              intersect: false
+            },
+            plugins: {
+              datalabels: {
+                color: 'black',
+                formatter: function (value, context) {
+                  console.log(context.dataset.label);
+                  return context.dataset.label + " " + value + "%";
+
+
+                },
+
+              }
+            }
+
+          }
+        });
+      </script>
+    </div>
+    <div class="column" style="background-color:#ddd;">
+      <div style="background-color: #113;text-align:center;padding:10px">
+        <div id="header1" style="color:#ddd;">
+          <span>
+            GWP
+          </span>
+          <span>
+            NWP
+          </span>
+          <span>
+            NEP
+          </span>
+          <span>
+            ROE
+          </span>
+        </div>
+        <div id="header2" style="color:#ddd;">
+          <span>
+            $47 B
+          </span>
+          <span>
+            $42.3 B
+          </span>
+          <span>
+            $38 B
+          </span>
+          <span>
+            33.1 %
+          </span>
+        </div>
+      </div>
+      <h3 style="text-align:center">Expense Ratio</h3>
+      <canvas id="chart2" class="canvas"></canvas>
+      <!--Stacked bar chart RHS-->
+      <script>
+        var ctx3 = document.getElementById('chart2');
+
+        var myChart3 = new Chart(ctx3, {
+          type: 'bar',
+          plugins: [ChartDataLabels],
+          data: {
+            labels: ['Value'],
+            datasets: [
+              {
+                label: 'Loss',
+                data: [68.0],
+                backgroundColor: 'rgb(217,54,54)',
+              },
+              {
+                label: 'Aquisition',
+                data: [17.0],
+                backgroundColor: 'rgb(228,139,74)',
+              },
+              {
+                label: 'Admin',
+                data: [12.0],
+                backgroundColor: 'rgb(255,170,0)',
+              },
+              {
+                label: 'UW Margin',
+                data: [3.0],
+                backgroundColor: 'rgb(0,176,80) ',
+              },
+            ]
+          },
+          options: {
+            maintainAspectRatio: true,
+            aspectRatio: aspectRatio,
+            scales: {
+              xAxes: [{
+                barThickness: 200,
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                stacked: true
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+
+
+                },
+                stacked: true,
+                ticks: {
+                  display: false //this will remove only the label
+                }
+
+              }]
+            },
+            tooltips: {
+              mode: 'point',
+              intersect: false
+            },
+            plugins: {
+              datalabels: {
+                color: 'black',
+                formatter: function (value, context) {
+
+                  return context.dataset.label + " " + value + "%";
+
+                },
+
+              }
+            }
+
+          }
+        });
+      </script>
+    </div>
+  </div>
+  <!--ROW 2-->
+  <div class="row">
+    <div class="column" style="background-color:#113;">
+      <h3 style="color:white;text-align: center;">Product Mix(%GWP)</h3>
+      <canvas id="myDoughnutChart1"></canvas>
+      <!--Doughnut Chart LHS-->
+      <script>
+        var ctx = document.getElementById('myDoughnutChart1').getContext('2d');
+        var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'doughnut',
+
+          // The data for our dataset
+          data: {
+            labels: ['Casualty', 'Fin Lines', 'Work Comp', 'Property', 'Pers Lines', 'A&H', 'Life'],
+            datasets: [{
+              label: 'My First dataset',
+              backgroundColor: ['rgb(51,102,204)', 'rgb(220,57,18)', 'rgb(255,153,0)', 'rgb(16,150,24)', 'rgb(147,10,147)', 'rgb(0,153,198)', 'rgb(221,68,119)'],
+              borderColor: 'rgb(255, 99, 132)',
+              data: [23.3, 19.9, 17, 14.2, 11.4, 8.5, 5.7],
+            }],
+
+          },
+
+          // Configuration options go here
+          options: {
+            maintainAspectRatio: true,
+            aspectRatio: aspectRatio,
+          }
+        });
+
+      </script>
+    </div>
+    <div class="column" style="background-color:#113;">
+      <h3 style="color:white;text-align: center">Product Mix(%GWP)</h3>
+      <canvas id="myDoughnutChart2"></canvas>
+      <!--Doughnut Chart RHS-->
+      <script>
+        var ctx1 = document.getElementById('myDoughnutChart2').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+          // The type of chart we want to create
+          type: 'doughnut',
+
+          // The data for our dataset
+          data: {
+            labels: ['Casualty', 'Fin Lines', 'Work Comp', 'Property', 'Pers Lines', 'A&H', 'Life'],
+            datasets: [{
+              label: 'My First dataset',
+              backgroundColor: ['rgb(51,102,204)', 'rgb(220,57,18)', 'rgb(255,153,0)', 'rgb(16,150,24)', 'rgb(147,10,147)', 'rgb(0,153,198)', 'rgb(221,68,119)'],
+              borderColor: 'rgb(255, 99, 132)',
+              data: [24.1, 19.7, 16.9, 14.1, 11.2, 8.4, 5.6],
+            }],
+
+          },
+
+          // Configuration options go here
+          options: {
+            maintainAspectRatio: true,
+            aspectRatio: aspectRatio,
+          }
+        });
+
+      </script>
+    </div>
+  </div>
+  <!--ROW 3-->
+  <div class="row">
+    <div class="column" style="background-color:#ddd;">
+
+      <h3 style="text-align:center">Capital Intensity</h3>
+      <canvas id="chartContainer1" class="canvas"></canvas>
+      <!--Stacked bar chart horizontal LHS-->
+      <script>
+        var ctx5 = document.getElementById('chartContainer1');
+
+        var myChart5 = new Chart(ctx5, {
+          type: 'horizontalBar',
+          plugins: [ChartDataLabels],
+          data: {
+            labels: ['Value'],
+
+            datasets: [
+              {
+                label: 'Low',
+                data: [22.0],
+                backgroundColor: 'rgb(217,54,54)',
+
+              },
+              {
+                label: 'High',
+                data: [78.0],
+                backgroundColor: 'rgb(228,139,74)',
+              }
+
+
+            ]
+          },
+          options: {
+            maintainAspectRatio: true,
+            aspectRatio: 5,
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                stacked: true,
+                ticks: {
+                  display: false //this will remove only the label
+                }
+
+              }],
+              yAxes: [{
+                barThickness: 30,
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+                },
+                stacked: true,
+                ticks: {
+                  display: false //this will remove only the label
+                }
+
+              }]
+            },
+            tooltips: {
+              mode: 'point',
+              intersect: false
+            },
+            plugins: {
+              datalabels: {
+                color: 'black',
+                formatter: function (value, context) {
+
+                  return context.dataset.label + " " + value + "%";
+                },
+
+              }
+            }
+          }
+        });
+      </script>
+    </div>
+    <div class="column" style="background-color:#ddd;">
+      <h3 style="text-align:center">Capital Intensity</h3>
+      <canvas id="chartContainer2" class="canvas"></canvas>
+      <!--Stacked bar chart horizontal RHS-->
+      <script>
+        var ctx6 = document.getElementById('chartContainer2');
+
+        var myChart6 = new Chart(ctx6, {
+          type: 'horizontalBar',
+          plugins: [ChartDataLabels],
+          data: {
+            labels: ['Value'],
+            datasets: [
+              {
+                label: 'Low',
+                data: [70.0],
+                backgroundColor: 'rgb(217,54,54)',
+              },
+              {
+                label: 'High',
+                data: [30.0],
+                backgroundColor: 'rgb(228,139,74)',
+              },
+
+
+
+            ]
+          },
+          options: {
+            maintainAspectRatio: true,
+            aspectRatio: 5,
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+
+                stacked: true,
+                ticks: {
+                  display: false //this will remove only the label
+                }
+              }],
+              yAxes: [{
+                barThickness: 30,
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+
+
+                },
+                stacked: true,
+                ticks: {
+                  display: false //this will remove only the label
+                }
+
+              }]
+            },
+            tooltips: {
+              mode: 'point',
+              intersect: false
+            },
+            plugins: {
+              datalabels: {
+                color: 'black',
+                defaultFontSize: 40,
+                formatter: function (value, context) {
+
+                  return context.dataset.label + " " + value + "%";
+
+                },
+
+              }
+            }
+          }
+        });
+      </script>
+    </div>
+  </div>
+</body>
+
+</html>
